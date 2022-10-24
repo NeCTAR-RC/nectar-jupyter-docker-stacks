@@ -81,7 +81,8 @@ Then you can use this handy one-liner to print the results, which will need to
 go into Helm chart values in the JupyterHub config in the
 [containers repo](https://git.rc.nectar.org.au/internal/containers)
 
-```$ docker images | awk '/registry.rc.nectar.org.au\/nectar\/jupyter-.*hub-3.0.0/ {print $1 ":" $3}'
+```
+$ docker images | awk '/registry.rc.nectar.org.au\/nectar\/jupyter-.*hub-3.0.0/ {print $1 ":" $3}'
 registry.rc.nectar.org.au/nectar/jupyter-datascience-notebook:9c5ee67a3531
 registry.rc.nectar.org.au/nectar/jupyter-scipy-notebook:758ef9e36fba
 registry.rc.nectar.org.au/nectar/jupyter-r-notebook:7e4e982de33d
