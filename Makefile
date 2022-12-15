@@ -7,9 +7,9 @@ TAG?=hub-3.0.0
 # All of the images
 ALL_IMAGES:= \
 	minimal-notebook \
-	r-notebook \
 	scipy-notebook \
-	datascience-notebook
+	datascience-notebook \
+	r-notebook
 
 # Enable BuildKit for Docker build
 export DOCKER_BUILDKIT:=1
@@ -45,7 +45,7 @@ cont-rm-all: ## remove all containers
 img-clean: img-rm-dang img-rm ## clean dangling and jupyter images
 img-list: ## list jupyter images
 	@echo "Listing $(OWNER) images ..."
-	docker images "$(OWNER)/*"
+	@docker images "$(OWNER)/*" | awk '/$(TAG)/ {print $$1 ":" $$3}'
 img-rm: ## remove jupyter images
 	@echo "Removing $(OWNER) images ..."
 	-docker rmi --force $(shell docker images --quiet "$(OWNER)/*") 2> /dev/null
