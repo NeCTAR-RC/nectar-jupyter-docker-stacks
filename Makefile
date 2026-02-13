@@ -1,7 +1,10 @@
 # Use bash for inline if-statements in arch_patch target
 SHELL:=bash
 OWNER?=registry.rc.nectar.org.au/nectar
-TAG?=hub-3.0.0
+TAG?=hub-5.4.3
+
+SOURCE_REGISTRY=quay.io
+SOURCE_OWNER=jupyter
 
 # Need to list the images in build dependency order
 # All of the images
@@ -12,7 +15,7 @@ ALL_IMAGES:= \
 	r-notebook
 
 # Enable BuildKit for Docker build
-export DOCKER_BUILDKIT:=1
+#export DOCKER_BUILDKIT:=1
 
 
 # https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
@@ -26,7 +29,7 @@ help:
 
 build/%: DOCKER_BUILD_ARGS?=
 build/%: ## build the latest image for a stack using the system's architecture
-	docker build $(DOCKER_BUILD_ARGS) --rm --force-rm -t $(OWNER)/jupyter-$(notdir $@):$(TAG) . --build-arg IMAGE="jupyter/$(notdir $@):$(TAG)"
+	docker build $(DOCKER_BUILD_ARGS) --rm --force-rm -t $(OWNER)/jupyter-$(notdir $@):$(TAG) . --build-arg IMAGE="$(SOURCE_REGISTRY)/$(SOURCE_OWNER)/$(notdir $@):$(TAG)"
 	@docker tag $(OWNER)/jupyter-$(notdir $@):$(TAG) $(OWNER)/jupyter-$(notdir $@):$$(docker images --filter=reference=$(OWNER)/jupyter-$(notdir $@):$(TAG) --format='{{index .ID}}')
 	@echo -n "Built image size: "
 	@docker images $(OWNER)/jupyter-$(notdir $@):$(TAG) --format "{{.Size}}"

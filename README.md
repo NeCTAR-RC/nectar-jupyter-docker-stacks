@@ -65,7 +65,7 @@ extension and install it to provide our customised look-and-feel.
 
 The images are then tagged with the standard Docker `Image ID` so we have an
 immutable tag to reference them with. They also include the upstream tag
-(currently using `hub-3.0.0`) for reference.
+(currently using `hub-5.4.3`) for reference.
 
 Once you're ready, you can the push the images to the registry:
 ```
@@ -82,7 +82,7 @@ go into Helm chart values in the JupyterHub config in the
 [containers repo](https://git.rc.nectar.org.au/internal/containers)
 
 ```
-$ docker images | awk '/registry.rc.nectar.org.au\/nectar\/jupyter-.*hub-3.0.0/ {print $1 ":" $3}'
+$ docker images | awk '/registry.rc.nectar.org.au\/nectar\/jupyter-.*hub-5.4.3/ {print $1 ":" $3}'
 registry.rc.nectar.org.au/nectar/jupyter-datascience-notebook:9c5ee67a3531
 registry.rc.nectar.org.au/nectar/jupyter-scipy-notebook:758ef9e36fba
 registry.rc.nectar.org.au/nectar/jupyter-r-notebook:7e4e982de33d
